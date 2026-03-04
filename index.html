@@ -130,7 +130,7 @@
         
 		<div class="botones">
 			<a href="#" class="boton" id="btnOtra">🎲 OTRA CURIOSIDAD</a>
-			<a href="https://mail.google.com/" class="boton secundario" id="btnVolver" target="_top">📧 VOLVER AL EMAIL</a>
+			<a href="#" class="boton secundario" id="btnVolver" onclick="volverAGmail(); return false;">📧 VOLVER AL EMAIL</a>
 		</div>
         
         <div class="mensaje-ayuda">
@@ -344,6 +344,11 @@
                 history.back();
             });
         }
+		
+		// ===== FUNCIÓN PARA VOLVER A GMAIL =====
+		function volverAGmail() {
+			// Intentar cerrar esta pestaña/ventana
+			window.close();
 
         // ===== INICIALIZAR =====
         window.onload = function() {
