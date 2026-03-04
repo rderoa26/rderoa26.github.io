@@ -331,11 +331,12 @@
                 mostrarCuriosidades(tipo);
             });
             
-            // Botón "Volver al email" - Esto debería volver al programa de correo
-            document.getElementById('btnVolver').addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Para volver a tu email, abre tu programa de correo (Gmail, Outlook, etc.)');
-            });
+            // Botón "Volver al email" - Ahora abre Gmail directamente
+			// El enlace ya está en el HTML, no necesitamos JavaScript para esto
+			// document.getElementById('btnVolver').addEventListener('click', function(e) {
+			//     e.preventDefault();
+			//     alert('Para volver a tu email, abre tu programa de correo (Gmail, Outlook, etc.)');
+			// });
             
             // Botón "Atrás"
             document.getElementById('btnAtras').addEventListener('click', function(e) {
