@@ -328,10 +328,29 @@
             });
         }
 
-		// ===== FUNCIÓN PARA VOLVER A GMAIL (INTENTA CERRAR LA PESTAÑA) =====
+		// ===== FUNCIÓN PARA VOLVER A GMAIL (CON MENSAJE CLARO) =====
 		function volverAGmail() {
-			// Simplemente redirige a Gmail en la misma pestaña
-			window.location.href = 'https://mail.google.com/';
+			var opcion = confirm(
+				"📧 VOLVER A GMAIL\n\n" +
+				"Tienes dos opciones:\n\n" +
+				"✅ ACEPTAR: Ir a Gmail (esta pestaña se convertirá en Gmail)\n" +
+				"❌ CANCELAR: Ver instrucciones para volver a la pestaña original\n\n" +
+				"¿Qué prefieres?"
+			);
+			
+			if (opcion) {
+				// Opción 1: Ir a Gmail en esta misma pestaña
+				window.location.href = 'https://mail.google.com/';
+			} else {
+				// Opción 2: Mostrar instrucciones claras
+				alert(
+					"📌 PARA VOLVER A LA PESTAÑA ORIGINAL DE GMAIL:\n\n" +
+					"1️⃣ Busca en la parte superior de tu navegador\n" +
+					"2️⃣ Localiza la primera pestaña de Gmail (la que abriste primero)\n" +
+					"3️⃣ Haz clic en ella\n\n" +
+					"4️⃣ Puedes cerrar esta pestaña cuando quieras (haz clic en la X)"
+				);
+			}
 		}
 
         // ===== INICIALIZAR =====
