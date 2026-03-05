@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rincón de la Curiosidad</title>
     <style>
+        /* (Mantén aquí todo tu CSS actual) */
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -143,166 +144,69 @@
     </div>
 
     <script>
-        // ===== BASE DE DATOS COMPLETA DE CURIOSIDADES =====
+        // ===== BASE DE DATOS DE CURIOSIDADES =====
         const curiosidadesDB = {
             refran: [
-                { 
-                    contenido: "Año de nieves, año de bienes", 
-                    extra: "Cuando nieva mucho, las cosechas serán buenas. La nieve protege los cultivos del frío intenso.",
-                    icono: "📜"
-                },
-                { 
-                    contenido: "Hasta el 40 de mayo no te quites el sayo", 
-                    extra: "Hasta finales de mayo puede hacer frío. El refrán aconseja no guardar la ropa de abrigo hasta bien entrado mayo.",
-                    icono: "🌡️"
-                },
-                { 
-                    contenido: "En abril, aguas mil", 
-                    extra: "Abril es tradicionalmente un mes muy lluvioso en España. Prepara el paraguas.",
-                    icono: "☔"
-                },
-                { 
-                    contenido: "A quien madruga, Dios le ayuda", 
-                    extra: "Los que empiezan el día pronto tienen más oportunidades y aprovechan mejor el tiempo.",
-                    icono: "🌅"
-                },
-                { 
-                    contenido: "No por mucho madrugar amanece más temprano", 
-                    extra: "Las prisas no aceleran las cosas. Hay procesos que llevan su tiempo.",
-                    icono: "⏰"
-                },
-                { 
-                    contenido: "Más vale pájaro en mano que ciento volando", 
-                    extra: "Es mejor conformarse con lo seguro que arriesgarse por algo mejor pero incierto.",
-                    icono: "🐦"
-                },
-                { 
-                    contenido: "Cuando el río suena, agua lleva", 
-                    extra: "Los rumores suelen tener algo de verdad. Si se habla de algo, por algo será.",
-                    icono: "🌊"
-                },
-                { 
-                    contenido: "Al mal tiempo, buena cara", 
-                    extra: "Cuando las cosas van mal, lo mejor es mantener el ánimo y la actitud positiva.",
-                    icono: "😊"
-                }
+                { contenido: "Año de nieves, año de bienes", extra: "Cuando nieva mucho, las cosechas serán buenas.", icono: "📜" },
+                { contenido: "Hasta el 40 de mayo no te quites el sayo", extra: "Hasta finales de mayo puede hacer frío.", icono: "🌡️" },
+                { contenido: "En abril, aguas mil", extra: "Abril es tradicionalmente un mes muy lluvioso.", icono: "☔" },
+                { contenido: "A quien madruga, Dios le ayuda", extra: "Los que madrugan aprovechan mejor el día.", icono: "🌅" },
+                { contenido: "Más vale pájaro en mano que ciento volando", extra: "Mejor lo seguro que lo incierto.", icono: "🐦" }
             ],
             efemeride: [
-                { 
-                    contenido: "Tal día como hoy, pero de 1937: Radio Nacional de España emitió por primera vez.", 
-                    extra: "Fue el 19 de enero de 1937. La primera emisión se realizó desde Salamanca.",
-                    icono: "📻"
-                },
-                { 
-                    contenido: "Tal día como hoy, pero de 1953: Se estrenó 'Bienvenido Mister Marshall'.", 
-                    extra: "Una de las películas más queridas del cine español, dirigida por Luis García Berlanga.",
-                    icono: "🎬"
-                },
-                { 
-                    contenido: "Tal día como hoy, pero de 1966: Raphael actuó por primera vez en Eurovisión.", 
-                    extra: "Con la canción 'Yo soy aquél', Raphael representó a España en el festival.",
-                    icono: "🎵"
-                }
+                { contenido: "Tal día como hoy, pero de 1937: Radio Nacional de España emitió por primera vez.", extra: "Fue el 19 de enero desde Salamanca.", icono: "📻" },
+                { contenido: "Tal día como hoy, pero de 1953: Se estrenó 'Bienvenido Mister Marshall'.", extra: "Una de las películas más queridas del cine español.", icono: "🎬" },
+                { contenido: "Tal día como hoy, pero de 1966: Raphael actuó en Eurovisión.", extra: "Con la canción 'Yo soy aquél'.", icono: "🎵" }
             ],
             receta: [
-                { 
-                    contenido: "Tortilla de patatas", 
-                    extra: "Receta tradicional: Patatas, huevos, cebolla (opcional), aceite y sal. Se fríen las patatas, se mezclan con huevo batido y se cuaja en la sartén.",
-                    icono: "🍳"
-                },
-                { 
-                    contenido: "Paella valenciana", 
-                    extra: "Arroz con pollo, conejo, judía verde, garrofón, tomate, aceite y azafrán. Un plato que representa a España en el mundo.",
-                    icono: "🥘"
-                },
-                { 
-                    contenido: "Gazpacho andaluz", 
-                    extra: "Sopa fría de tomate, pepino, pimiento, ajo, pan, aceite de oliva y vinagre. Perfecto para el verano.",
-                    icono: "🥣"
-                }
+                { contenido: "Tortilla de patatas", extra: "Patatas, huevos, cebolla, aceite y sal.", icono: "🍳" },
+                { contenido: "Paella valenciana", extra: "Arroz, pollo, conejo, judía verde, garrofón.", icono: "🥘" },
+                { contenido: "Gazpacho andaluz", extra: "Tomate, pepino, pimiento, ajo, pan, aceite y vinagre.", icono: "🥣" }
             ],
             numero: [
-                { 
-                    contenido: "El 7 es el número de la buena suerte", 
-                    extra: "En muchas culturas, el 7 se considera mágico: 7 días de la semana, 7 maravillas del mundo, 7 colores del arcoíris.",
-                    icono: "7️⃣"
-                },
-                { 
-                    contenido: "El 13 es considerado de mala suerte", 
-                    extra: "Muchos edificios no tienen piso 13, y el viernes 13 se considera un día de mala suerte en muchas culturas.",
-                    icono: "13️⃣"
-                },
-                { 
-                    contenido: "El 108 es un número sagrado", 
-                    extra: "En el hinduismo y budismo, el 108 es sagrado. Hay 108 cuentas en los rosarios y 108 nombres de deidades.",
-                    icono: "🔢"
-                }
+                { contenido: "El 7 es el número de la buena suerte", extra: "7 días, 7 maravillas, 7 colores.", icono: "7️⃣" },
+                { contenido: "El 13 es considerado de mala suerte", extra: "Por eso muchos edificios no tienen piso 13.", icono: "13️⃣" },
+                { contenido: "El 108 es un número sagrado", extra: "En el hinduismo y budismo.", icono: "108️⃣" }
             ],
             cita: [
-                { 
-                    contenido: "No hay camino para la paz, la paz es el camino", 
-                    extra: "— Mahatma Gandhi. Una reflexión sobre cómo vivir en paz.",
-                    icono: "💭"
-                },
-                { 
-                    contenido: "La vida es muy peligrosa. No por las personas que hacen el mal, sino por las que se sientan a ver lo que pasa", 
-                    extra: "— Albert Einstein. Sobre la importancia de no ser indiferentes.",
-                    icono: "🌟"
-                },
-                { 
-                    contenido: "El secreto de la felicidad no es hacer siempre lo que se quiere, sino querer siempre lo que se hace", 
-                    extra: "— León Tolstói. Una lección sobre la actitud ante la vida.",
-                    icono: "💫"
-                }
+                { contenido: "No hay camino para la paz, la paz es el camino", extra: "— Mahatma Gandhi", icono: "💭" },
+                { contenido: "La vida es muy peligrosa...", extra: "— Albert Einstein", icono: "🌟" }
             ]
         };
 
-        // ===== FUNCIÓN PARA OBTENER EL TIPO DE LA URL =====
         function getTipoFromURL() {
             const params = new URLSearchParams(window.location.search);
             return params.get('tipo') || 'refran';
         }
 
-        // ===== FUNCIÓN PARA OBTENER NÚMERO ALEATORIO =====
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
 
-        // ===== FUNCIÓN PARA MOSTRAR CURIOSIDADES =====
         function mostrarCuriosidades(tipo) {
-            // Verificar que el tipo existe
-            if (!curiosidadesDB[tipo]) {
-                tipo = 'refran';
-            }
-            
+            if (!curiosidadesDB[tipo]) tipo = 'refran';
             const lista = curiosidadesDB[tipo];
             
-            // Seleccionar 3 índices aleatorios diferentes
             const indices = [];
             while (indices.length < 3 && indices.length < lista.length) {
                 const randomIndex = getRandomInt(lista.length);
-                if (!indices.includes(randomIndex)) {
-                    indices.push(randomIndex);
-                }
+                if (!indices.includes(randomIndex)) indices.push(randomIndex);
             }
             
-            // Construir HTML
             let html = '';
             indices.forEach(index => {
                 const item = lista[index];
                 html += `
                     <div class="tarjeta-curiosidad">
-                        <div style="font-size: 48px; margin-bottom: 10px;">${item.icono}</div>
+                        <div style="font-size: 48px;">${item.icono}</div>
                         <div class="contenido-principal">${item.contenido}</div>
                         <div class="contenido-extra">${item.extra}</div>
                     </div>
                 `;
             });
             
-            // Actualizar el contenido
             document.getElementById('contenedor-curiosidades').innerHTML = html;
             
-            // Actualizar título de categoría
             const nombresCat = {
                 'refran': '📜 Refranes populares',
                 'efemeride': '🎬 Efemérides',
@@ -313,47 +217,41 @@
             document.getElementById('categoria').textContent = nombresCat[tipo] || 'Curiosidades';
         }
 
-        // ===== CONFIGURAR BOTONES =====
         function configurarBotones(tipo) {
-            // Botón "Otra curiosidad"
             document.getElementById('btnOtra').addEventListener('click', function(e) {
                 e.preventDefault();
                 mostrarCuriosidades(tipo);
             });
             
-            // Botón "Atrás"
             document.getElementById('btnAtras').addEventListener('click', function(e) {
                 e.preventDefault();
                 history.back();
             });
         }
 
-		// ===== FUNCIÓN PARA VOLVER A GMAIL (CON MENSAJE CLARO) =====
-		function volverAGmail() {
-			var opcion = confirm(
-				"📧 VOLVER A GMAIL\n\n" +
-				"Tienes dos opciones:\n\n" +
-				"✅ ACEPTAR: Ir a Gmail (esta pestaña se convertirá en Gmail)\n" +
-				"❌ CANCELAR: Ver instrucciones para volver a la pestaña original\n\n" +
-				"¿Qué prefieres?"
-			);
-			
-			if (opcion) {
-				// Opción 1: Ir a Gmail en esta misma pestaña
-				window.location.href = 'https://mail.google.com/';
-			} else {
-				// Opción 2: Mostrar instrucciones claras
-				alert(
-					"📌 PARA VOLVER A LA PESTAÑA ORIGINAL DE GMAIL:\n\n" +
-					"1️⃣ Busca en la parte superior de tu navegador\n" +
-					"2️⃣ Localiza la primera pestaña de Gmail (la que abriste primero)\n" +
-					"3️⃣ Haz clic en ella\n\n" +
-					"4️⃣ Puedes cerrar esta pestaña cuando quieras (haz clic en la X)"
-				);
-			}
-		}
+        // ===== FUNCIÓN PARA VOLVER A GMAIL (INSTRUCCIONES CLARAS) =====
+        function volverAGmail() {
+            alert(
+                "📧 PARA VOLVER A TU CORREO:\n\n" +
+                "─────────────────────────────\n" +
+                "1️⃣ MIRA ARRIBA DE LA PANTALLA\n" +
+                "─────────────────────────────\n\n" +
+                "Verás varias pestañas abiertas:\n" +
+                "   • 📧 Gmail (la primera)\n" +
+                "   • 🌟 Rincón de la curiosidad (esta)\n\n" +
+                "─────────────────────────────\n" +
+                "2️⃣ HAZ CLIC EN LA PESTAÑA DE GMAIL\n" +
+                "─────────────────────────────\n\n" +
+                "La primera pestaña (Gmail original)\n" +
+                "sigue abierta con tu correo.\n\n" +
+                "─────────────────────────────\n" +
+                "3️⃣ PUEDES CERRAR ESTA PESTAÑA\n" +
+                "─────────────────────────────\n" +
+                "Haz clic en la X de esta pestaña\n" +
+                "cuando quieras cerrar las curiosidades."
+            );
+        }
 
-        // ===== INICIALIZAR =====
         window.onload = function() {
             const tipo = getTipoFromURL();
             mostrarCuriosidades(tipo);
