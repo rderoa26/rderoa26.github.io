@@ -229,34 +229,31 @@
             });
         }
 
-        // ===== FUNCIÓN PARA VOLVER A GMAIL (INSTRUCCIONES CLARAS) =====
-        function volverAGmail() {
-            alert(
-                "📧 PARA VOLVER A TU CORREO:\n\n" +
-                "─────────────────────────────\n" +
-                "1️⃣ MIRA ARRIBA DE LA PANTALLA\n" +
-                "─────────────────────────────\n\n" +
-                "Verás varias pestañas abiertas:\n" +
-                "   • 📧 Gmail (la primera)\n" +
-                "   • 🌟 Rincón de la curiosidad (esta)\n\n" +
-                "─────────────────────────────\n" +
-                "2️⃣ HAZ CLIC EN LA PESTAÑA DE GMAIL\n" +
-                "─────────────────────────────\n\n" +
-                "La primera pestaña (Gmail original)\n" +
-                "sigue abierta con tu correo.\n\n" +
-                "─────────────────────────────\n" +
-                "3️⃣ PUEDES CERRAR ESTA PESTAÑA\n" +
-                "─────────────────────────────\n" +
-                "Haz clic en la X de esta pestaña\n" +
-                "cuando quieras cerrar las curiosidades."
-            );
-        }
+			// ===== FUNCIÓN PARA VOLVER A GMAIL (MEJORADA) =====
+			function volverAGmail() {
+				var origen = sessionStorage.getItem('ventana_origen');
+				
+				if (origen === 'gmail') {
+					// Esta ventana fue abierta desde Gmail, podemos cerrarla
+					// y volver a la pestaña original
+					window.close();
+				} else {
+					// Si no sabemos el origen, redirigimos a Gmail en esta pestaña
+					window.location.href = 'https://mail.google.com/';
+				}
+			}
 
-        window.onload = function() {
-            const tipo = getTipoFromURL();
-            mostrarCuriosidades(tipo);
-            configurarBotones(tipo);
-        };
-    </script>
+			// ===== AL CARGAR LA PÁGINA =====
+			window.onload = function() {
+				// Si no hay marca, es una ventana nueva abierta desde Gmail
+				if (!sessionStorage.getItem('ventana_origen')) {
+					sessionStorage.setItem('ventana_origen', 'gmail');
+				}
+				
+				const tipo = getTipoFromURL();
+				mostrarCuriosidades(tipo);
+				configurarBotones(tipo);
+			};
+	</script>
 </body>
 </html>
