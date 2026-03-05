@@ -329,14 +329,44 @@
         }
 
         // ===== FUNCIÓN PARA VOLVER A GMAIL (con mensaje claro) =====
-        function volverAGmail() {
-            alert(
-                "📧 PARA VOLVER A TU EMAIL:\n\n" +
-                "1️⃣ Localiza la pestaña de Gmail que ya tenías abierta\n" +
-                "2️⃣ Haz clic en ella para volver a tu correo\n\n" +
-                "❌ Puedes cerrar esta pestaña cuando quieras"
-            );
-        }
+		function volverAGmail() {
+			// Intentar cerrar esta pestaña
+			var pestañaCerrada = false;
+			
+			try {
+				// Intentar cerrar la ventana/pestaña actual
+				window.close();
+				pestañaCerrada = true;
+			} catch(e) {
+				// Si falla, no pasa nada
+				console.log("No se pudo cerrar automáticamente");
+			}
+			
+			// Dar tiempo a que el navegador intente cerrar
+			setTimeout(function() {
+				if (!pestañaCerrada) {
+					// Si no se cerró, mostrar instrucciones y ofrecer ir a Gmail
+					var decision = confirm(
+						"📧 ¿CÓMO VOLVER A GMAIL?\n\n" +
+						"No se pudo cerrar esta pestaña automáticamente.\n\n" +
+						"¿Quieres ir a Gmail ahora?\n\n" +
+						"• Aceptar: Abrir Gmail en esta pestaña\n" +
+						"• Cancelar: Dejar instrucciones"
+					);
+					
+					if (decision) {
+						window.location.href = 'https://mail.google.com/';
+					} else {
+						alert(
+							"📌 INSTRUCCIONES:\n\n" +
+							"1. Busca la pestaña de Gmail que ya tenías abierta\n" +
+							"2. Haz clic en ella para volver a tu correo\n\n" +
+							"❌ Puedes cerrar esta pestaña manualmente"
+						);
+					}
+				}
+			}, 500);
+		}
 
         // ===== INICIALIZAR =====
         window.onload = function() {
