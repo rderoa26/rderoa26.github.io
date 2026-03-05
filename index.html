@@ -143,117 +143,103 @@
         </div>
     </div>
 
-    <script>
-        // ===== BASE DE DATOS DE CURIOSIDADES =====
-        const curiosidadesDB = {
-            refran: [
-                { contenido: "Año de nieves, año de bienes", extra: "Cuando nieva mucho, las cosechas serán buenas.", icono: "📜" },
-                { contenido: "Hasta el 40 de mayo no te quites el sayo", extra: "Hasta finales de mayo puede hacer frío.", icono: "🌡️" },
-                { contenido: "En abril, aguas mil", extra: "Abril es tradicionalmente un mes muy lluvioso.", icono: "☔" },
-                { contenido: "A quien madruga, Dios le ayuda", extra: "Los que madrugan aprovechan mejor el día.", icono: "🌅" },
-                { contenido: "Más vale pájaro en mano que ciento volando", extra: "Mejor lo seguro que lo incierto.", icono: "🐦" }
-            ],
-            efemeride: [
-                { contenido: "Tal día como hoy, pero de 1937: Radio Nacional de España emitió por primera vez.", extra: "Fue el 19 de enero desde Salamanca.", icono: "📻" },
-                { contenido: "Tal día como hoy, pero de 1953: Se estrenó 'Bienvenido Mister Marshall'.", extra: "Una de las películas más queridas del cine español.", icono: "🎬" },
-                { contenido: "Tal día como hoy, pero de 1966: Raphael actuó en Eurovisión.", extra: "Con la canción 'Yo soy aquél'.", icono: "🎵" }
-            ],
-            receta: [
-                { contenido: "Tortilla de patatas", extra: "Patatas, huevos, cebolla, aceite y sal.", icono: "🍳" },
-                { contenido: "Paella valenciana", extra: "Arroz, pollo, conejo, judía verde, garrofón.", icono: "🥘" },
-                { contenido: "Gazpacho andaluz", extra: "Tomate, pepino, pimiento, ajo, pan, aceite y vinagre.", icono: "🥣" }
-            ],
-            numero: [
-                { contenido: "El 7 es el número de la buena suerte", extra: "7 días, 7 maravillas, 7 colores.", icono: "7️⃣" },
-                { contenido: "El 13 es considerado de mala suerte", extra: "Por eso muchos edificios no tienen piso 13.", icono: "13️⃣" },
-                { contenido: "El 108 es un número sagrado", extra: "En el hinduismo y budismo.", icono: "108️⃣" }
-            ],
-            cita: [
-                { contenido: "No hay camino para la paz, la paz es el camino", extra: "— Mahatma Gandhi", icono: "💭" },
-                { contenido: "La vida es muy peligrosa...", extra: "— Albert Einstein", icono: "🌟" }
-            ]
-        };
+	<script>
+		// ===== BASE DE DATOS DE CURIOSIDADES =====
+		const curiosidadesDB = {
+			refran: [
+				{ contenido: "Año de nieves, año de bienes", extra: "Cuando nieva mucho, las cosechas serán buenas.", icono: "📜" },
+				{ contenido: "Hasta el 40 de mayo no te quites el sayo", extra: "Hasta finales de mayo puede hacer frío.", icono: "🌡️" },
+				{ contenido: "En abril, aguas mil", extra: "Abril es tradicionalmente un mes muy lluvioso.", icono: "☔" }
+			],
+			efemeride: [
+				{ contenido: "Tal día como hoy, pero de 1937: Radio Nacional de España emitió por primera vez.", extra: "Fue el 19 de enero desde Salamanca.", icono: "📻" },
+				{ contenido: "Tal día como hoy, pero de 1953: Se estrenó 'Bienvenido Mister Marshall'.", extra: "Una de las películas más queridas del cine español.", icono: "🎬" }
+			],
+			receta: [
+				{ contenido: "Tortilla de patatas", extra: "Patatas, huevos, cebolla, aceite y sal.", icono: "🍳" },
+				{ contenido: "Paella valenciana", extra: "Arroz, pollo, conejo, judía verde, garrofón.", icono: "🥘" }
+			],
+			numero: [
+				{ contenido: "El 7 es el número de la buena suerte", extra: "7 días, 7 maravillas, 7 colores.", icono: "7️⃣" },
+				{ contenido: "El 13 es considerado de mala suerte", extra: "Por eso muchos edificios no tienen piso 13.", icono: "13️⃣" }
+			],
+			cita: [
+				{ contenido: "No hay camino para la paz, la paz es el camino", extra: "— Mahatma Gandhi", icono: "💭" }
+			]
+		};
 
-        function getTipoFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('tipo') || 'refran';
-        }
+		function getTipoFromURL() {
+			const params = new URLSearchParams(window.location.search);
+			return params.get('tipo') || 'refran';
+		}
 
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
+		function getRandomInt(max) {
+			return Math.floor(Math.random() * max);
+		}
 
-        function mostrarCuriosidades(tipo) {
-            if (!curiosidadesDB[tipo]) tipo = 'refran';
-            const lista = curiosidadesDB[tipo];
-            
-            const indices = [];
-            while (indices.length < 3 && indices.length < lista.length) {
-                const randomIndex = getRandomInt(lista.length);
-                if (!indices.includes(randomIndex)) indices.push(randomIndex);
-            }
-            
-            let html = '';
-            indices.forEach(index => {
-                const item = lista[index];
-                html += `
-                    <div class="tarjeta-curiosidad">
-                        <div style="font-size: 48px;">${item.icono}</div>
-                        <div class="contenido-principal">${item.contenido}</div>
-                        <div class="contenido-extra">${item.extra}</div>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('contenedor-curiosidades').innerHTML = html;
-            
-            const nombresCat = {
-                'refran': '📜 Refranes populares',
-                'efemeride': '🎬 Efemérides',
-                'receta': '🍳 Recetas tradicionales',
-                'numero': '🔢 Curiosidades numéricas',
-                'cita': '💭 Citas inspiradoras'
-            };
-            document.getElementById('categoria').textContent = nombresCat[tipo] || 'Curiosidades';
-        }
-
-        function configurarBotones(tipo) {
-            document.getElementById('btnOtra').addEventListener('click', function(e) {
-                e.preventDefault();
-                mostrarCuriosidades(tipo);
-            });
-            
-            document.getElementById('btnAtras').addEventListener('click', function(e) {
-                e.preventDefault();
-                history.back();
-            });
-        }
-
-			// ===== FUNCIÓN PARA VOLVER A GMAIL (MEJORADA) =====
-			function volverAGmail() {
-				var origen = sessionStorage.getItem('ventana_origen');
-				
-				if (origen === 'gmail') {
-					// Esta ventana fue abierta desde Gmail, podemos cerrarla
-					// y volver a la pestaña original
-					window.close();
-				} else {
-					// Si no sabemos el origen, redirigimos a Gmail en esta pestaña
-					window.location.href = 'https://mail.google.com/';
-				}
+		function mostrarCuriosidades(tipo) {
+			if (!curiosidadesDB[tipo]) tipo = 'refran';
+			const lista = curiosidadesDB[tipo];
+			
+			const indices = [];
+			while (indices.length < 3 && indices.length < lista.length) {
+				const randomIndex = getRandomInt(lista.length);
+				if (!indices.includes(randomIndex)) indices.push(randomIndex);
 			}
-
-			// ===== AL CARGAR LA PÁGINA =====
-			window.onload = function() {
-				// Si no hay marca, es una ventana nueva abierta desde Gmail
-				if (!sessionStorage.getItem('ventana_origen')) {
-					sessionStorage.setItem('ventana_origen', 'gmail');
-				}
-				
-				const tipo = getTipoFromURL();
-				mostrarCuriosidades(tipo);
-				configurarBotones(tipo);
+			
+			let html = '';
+			indices.forEach(index => {
+				const item = lista[index];
+				html += `
+					<div class="tarjeta-curiosidad">
+						<div style="font-size: 48px;">${item.icono}</div>
+						<div class="contenido-principal">${item.contenido}</div>
+						<div class="contenido-extra">${item.extra}</div>
+					</div>
+				`;
+			});
+			
+			document.getElementById('contenedor-curiosidades').innerHTML = html;
+			
+			const nombresCat = {
+				'refran': '📜 Refranes populares',
+				'efemeride': '🎬 Efemérides',
+				'receta': '🍳 Recetas tradicionales',
+				'numero': '🔢 Curiosidades numéricas',
+				'cita': '💭 Citas inspiradoras'
 			};
+			document.getElementById('categoria').textContent = nombresCat[tipo] || 'Curiosidades';
+		}
+
+		function configurarBotones(tipo) {
+			document.getElementById('btnOtra').addEventListener('click', function(e) {
+				e.preventDefault();
+				mostrarCuriosidades(tipo);
+			});
+			
+			document.getElementById('btnAtras').addEventListener('click', function(e) {
+				e.preventDefault();
+				history.back();
+			});
+		}
+
+		// ===== FUNCIÓN PARA VOLVER A GMAIL (VERSIÓN QUE FUNCIONA) =====
+		function volverAGmail() {
+			// Intentar cerrar la ventana
+			window.close();
+			
+			// Por si acaso no se cierra, redirigir a Gmail después de 1 segundo
+			setTimeout(function() {
+				window.location.href = 'https://mail.google.com/';
+			}, 1000);
+		}
+
+		// ===== INICIALIZAR =====
+		window.onload = function() {
+			const tipo = getTipoFromURL();
+			mostrarCuriosidades(tipo);
+			configurarBotones(tipo);
+		};
 	</script>
 </body>
 </html>
