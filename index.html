@@ -128,10 +128,10 @@
             <!-- Se llenará con JavaScript -->
         </div>
         
-		<div class="botones">
-			<a href="#" class="boton" id="btnOtra">🎲 OTRA CURIOSIDAD</a>
-			<a href="#" class="boton secundario" id="btnVolver" onclick="volverAGmail(); return false;">📧 VOLVER AL EMAIL</a>
-		</div>
+        <div class="botones">
+            <a href="#" class="boton" id="btnOtra">🎲 OTRA CURIOSIDAD</a>
+            <a href="#" class="boton secundario" id="btnVolver" onclick="volverAGmail(); return false;">📧 VOLVER AL EMAIL</a>
+        </div>
         
         <div class="mensaje-ayuda">
             💡 Pulsa "OTRA CURIOSIDAD" para ver más del mismo tema
@@ -254,41 +254,31 @@
                     extra: "— León Tolstói. Una lección sobre la actitud ante la vida.",
                     icono: "💫"
                 }
-            ],
-            general: [
-                { 
-                    contenido: "Radio Nacional de España emitió por primera vez el 19 enero 1937.", 
-                    extra: "La primera emisión fue desde Salamanca, en plena Guerra Civil.",
-                    icono: "📻"
-                },
-                { 
-                    contenido: "El refranero español tiene más de 100.000 refranes documentados.", 
-                    extra: "Es uno de los más ricos del mundo, fruto de siglos de sabiduría popular.",
-                    icono: "📚"
-                },
-                { 
-                    contenido: "La siesta española tiene origen en la Guerra Civil.", 
-                    extra: "Los trabajadores descansaban en las horas de más calor para evitar el cansancio extremo.",
-                    icono: "😴"
-                }
             ]
         };
 
-        // ===== FUNCIONES =====
+        // ===== FUNCIÓN PARA OBTENER EL TIPO DE LA URL =====
         function getTipoFromURL() {
             const params = new URLSearchParams(window.location.search);
             return params.get('tipo') || 'refran';
         }
 
+        // ===== FUNCIÓN PARA OBTENER NÚMERO ALEATORIO =====
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
 
+        // ===== FUNCIÓN PARA MOSTRAR CURIOSIDADES =====
         function mostrarCuriosidades(tipo) {
-            const lista = curiosidadesDB[tipo] || curiosidadesDB.general;
-            const indices = [];
+            // Verificar que el tipo existe
+            if (!curiosidadesDB[tipo]) {
+                tipo = 'refran';
+            }
+            
+            const lista = curiosidadesDB[tipo];
             
             // Seleccionar 3 índices aleatorios diferentes
+            const indices = [];
             while (indices.length < 3 && indices.length < lista.length) {
                 const randomIndex = getRandomInt(lista.length);
                 if (!indices.includes(randomIndex)) {
@@ -309,6 +299,7 @@
                 `;
             });
             
+            // Actualizar el contenido
             document.getElementById('contenedor-curiosidades').innerHTML = html;
             
             // Actualizar título de categoría
@@ -317,8 +308,7 @@
                 'efemeride': '🎬 Efemérides',
                 'receta': '🍳 Recetas tradicionales',
                 'numero': '🔢 Curiosidades numéricas',
-                'cita': '💭 Citas inspiradoras',
-                'general': '🌟 Curiosidades generales'
+                'cita': '💭 Citas inspiradoras'
             };
             document.getElementById('categoria').textContent = nombresCat[tipo] || 'Curiosidades';
         }
@@ -331,24 +321,22 @@
                 mostrarCuriosidades(tipo);
             });
             
-            // Botón "Volver al email" - Ahora abre Gmail directamente
-			// El enlace ya está en el HTML, no necesitamos JavaScript para esto
-			// document.getElementById('btnVolver').addEventListener('click', function(e) {
-			//     e.preventDefault();
-			//     alert('Para volver a tu email, abre tu programa de correo (Gmail, Outlook, etc.)');
-			// });
-            
             // Botón "Atrás"
             document.getElementById('btnAtras').addEventListener('click', function(e) {
                 e.preventDefault();
                 history.back();
             });
         }
-		
-		// ===== FUNCIÓN PARA VOLVER A GMAIL =====
-		function volverAGmail() {
-			// Intentar cerrar esta pestaña/ventana
-			window.close();
+
+        // ===== FUNCIÓN PARA VOLVER A GMAIL (con mensaje claro) =====
+        function volverAGmail() {
+            alert(
+                "📧 PARA VOLVER A TU EMAIL:\n\n" +
+                "1️⃣ Localiza la pestaña de Gmail que ya tenías abierta\n" +
+                "2️⃣ Haz clic en ella para volver a tu correo\n\n" +
+                "❌ Puedes cerrar esta pestaña cuando quieras"
+            );
+        }
 
         // ===== INICIALIZAR =====
         window.onload = function() {
@@ -358,5 +346,4 @@
         };
     </script>
 </body>
-
 </html>
